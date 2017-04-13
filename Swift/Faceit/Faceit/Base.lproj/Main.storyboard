@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="eyesOpen" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="eyesOpen" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="mouthCurvature">
                                         <real key="value" value="0.5"/>
                                     </userDefinedRuntimeAttribute>
@@ -49,6 +49,9 @@
                             <constraint firstItem="mJC-Wg-KM6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="i5w-2c-q7Y"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="faceView" destination="mJC-Wg-KM6" id="fmo-wC-m1Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
