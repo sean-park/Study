@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Node.js Programming for Modern Web</title>
+	<style>
+		.line{
+			overflow: hidden;
+		}
+
+		.seat{
+			margin: 2px;
+			float: left;
+			width: 30px;
+			height: 30px;
+			border-radius: 3px;
+		}
+
+		.enable {
+			background: gray;
+		}
+
+		.enable:hover {
+			background: black;
+		}
+
+		.disable {
+			background: red;
+		}
+		</style>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<!-- initialize socket -->
+		<script>
+			$(document).ready(function () {
+            // initialize variables
+            var onClickSeat = function () {
+                var x = $(this).attr('data-x');
+                var y = $(this).attr('data-y');
+                if (confirm('Do you want to reserve the seat?')) {
+                    $(this).off('click');
+                    socket.emit('reserve', {
+                        x: x,
+                        y: y
+                    });
+                } else {
+                    alert('It canceled');
+                }
+            };
+            // execute Ajax
+            $.getJSON('/seats', { dummy: new Date().getTime() }, function (data) {
+                // initialize the seats
+                $.each(data, function (indexY, line) {
+                    // initialize document object
+                    var $line = $('<div></div>').addClass('line');
+                    $.each(line, function (indexX, seat) {
+                        // initialize document object and add to $line
+                        var $output = $('<div></div>', {
+                            'class': 'seat',
+                            'data-x': indexX,
+                            'data-y': indexY
+                        }).appendTo($line);
+                        if (seat == 1) {
+                            // if seat is empty add enable class and click listener
+                            $output.addClass('enable').on('click', onClickSeat);
+                        } else if (seat == 2) {
+                            // if the seats are unavaialbe, add disable class 
+                            $output.addClass('disable');
+                        }
+                    });
+                    // add document object
+                    $line.appendTo('body');
+                });
+            });
+        });
+</script>
+</head>
+<body>
+
+</body>
+</html>
